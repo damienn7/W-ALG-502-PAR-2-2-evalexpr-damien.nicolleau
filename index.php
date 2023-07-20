@@ -54,7 +54,10 @@ function eval_expr($expr)
     return (double) $sub_result==""?$result."\n":$sub_result."\n";
 }
 
+
 function create_array_with_float($str){
+    //create array without spaces
+    $str = str_replace(" ","",$str);
     $array1 = str_split($str);
     $array_with_float = array();
     $number = null;
@@ -91,6 +94,7 @@ function calc_subexpr($subexpr,$check=false)
     if ($check===false) {
         
         for ($i = 0; $i < count($subexpr); $i++) {
+            // echo "sub_result : ".$sub_result." count : $i\n";
             switch ($subexpr[$i]) {
                 case '+':
                     if ($subexpr[$i+2]==="/"||$subexpr[$i+2]==="%"||$subexpr[$i+2]==="*") {
@@ -109,7 +113,6 @@ function calc_subexpr($subexpr,$check=false)
             case '/':
                 $sub_result = $sub_result === null?$subexpr[$i - 1] / $subexpr[$i + 1]:$sub_result / $subexpr[$i+1];
                 // echo "last : ".$subexpr[$i - 1]."\n";
-                // echo "sub_result : ".$sub_result."\n";
                 // echo "next : ".$subexpr[$i + 1]."\n";
                 $i++;
                 break;
